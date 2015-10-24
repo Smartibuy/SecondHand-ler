@@ -2,24 +2,24 @@ require 'koala'
 require 'json'
 
 module SecondHandler
-  class FbGroupPost 
+  class FbGroupPost
     def initialize (access_token, group_id)
       @graph = Koala::Facebook::API.new(access_token)
       @group_id = group_id
     end
-   
+
     def first_page
       @feed = @graph.get_connections(@group_id, "feed", :fields => ["attachments{media,subattachments{media}}","id","message","updated_time"])
     end
-        
+
     def next_page
       @feed = @feed.next_page
     end
-    
+
     def previous_page
       @feed = @feed.previous_page
     end
-    
+
     # return feed of current page  infomation , including image
     def get_content
       @feed.map do |item|
@@ -30,11 +30,11 @@ module SecondHandler
         tmp["attachments"] = attachment_helper(item["attachments"])
         tmp
       end
-   
+
     end
 
     private
-    
+
     def attachment_helper (attach_hash)
       ok_data = []
       if attach_hash && attach_hash["data"].first["media"]
