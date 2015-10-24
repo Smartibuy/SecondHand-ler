@@ -1,7 +1,7 @@
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'second_handler/version'
 Gem::Specification.new do |s|
-  s.name = 'second_handler'
+  s.name = 'SecondHandler'
   s.version = SecondHandler::VERSION
   s.date = SecondHandler::DATE
   s.executables << 'second_handler'
@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   # depend gem
   s.add_development_dependency 'minitest'
   s.add_runtime_dependency 'koala'
+  s.add_runtime_dependency 'commander'
 end
