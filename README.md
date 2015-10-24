@@ -13,7 +13,7 @@ gem install secondHandler
 **Code Snippet**
 ```ruby
 require 'second_handler'
-SecondHandler::FbGroupPost.new(access_token, "group_id")
+fb = SecondHandler::FbGroupPost.new(access_token, "group_id")
 # fetch first page
 page = fb.first_page
 # get content
