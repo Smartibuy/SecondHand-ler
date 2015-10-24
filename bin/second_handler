@@ -1,2 +1,18 @@
 #!/usr/bin/env ruby
-# executable files.
+require 'rubygems'
+require 'commander'
+
+Commander.configure do
+  program :name, 'SecondHandler'
+  program :version, '0.0.1'
+  program :description, 'A retriever of second hand information of Facebook or Twitter.'
+
+  command :show do |c|
+    c.syntax = 'second_handler show'
+    c.description = 'Show group information by specified ID.'
+    c.option '--id Group ID', Integer, 'Show Group information'
+    c.action do |args, options|
+      puts options.id
+    end
+  end
+end
