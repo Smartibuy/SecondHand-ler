@@ -1,18 +1,38 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'commander'
+require_relative '../lib/second_handler'
 
 Commander.configure do
   program :name, 'SecondHandler'
   program :version, '0.0.1'
   program :description, 'A retriever of second hand information of Facebook or Twitter.'
 
-  command :show do |c|
-    c.syntax = 'second_handler show'
-    c.description = 'Show group information by specified ID.'
-    c.option '--id Group ID', Integer, 'Show Group information'
+  command :fb do |c|
+    c.syntax = 'second_handler fb --token access_token --id group_id'
+    c.description = 'Show selling information of a Facebook group'
+    c.option '--token access_token', String, 'Access token'
+    c.option '--id group_id', String, 'Group ID'
     c.action do |args, options|
-      puts options.id
+      if options.token && options.id
+        fb = SecondHandler::FbGroupPost.new(options.token, options.id)
+        page = fb.first_page
+        page.each do |e|
+          puts "<ID>\n" << e['id']
+          puts "\n\n<Informations>\n" << e['message']
+          puts "\n\n<Update Time>\n" << e['updated_time']
+          puts "\n\n<Attachments>\n"
+          puts e['attachments']
+          puts '============================================================================================================'
+        end
+      end
     end
   end
+
+  command :twitter do |c|
+    c.syntax = 'second_handler twitter'
+    c.description = 'Show selling information of twitter'
+    # Implementing.
+  end
+
 end
