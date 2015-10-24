@@ -3,6 +3,47 @@ require 'rubygems'
 require 'commander'
 require_relative '../lib/second_handler'
 
+def read_char
+  STDIN.echo = false
+  STDIN.raw!
+
+  input = STDIN.getc.chr
+  if input == "\e" then
+    input << STDIN.read_nonblock(3) rescue nil
+    input << STDIN.read_nonblock(2) rescue nil
+  end
+ensure
+  STDIN.echo = true
+  STDIN.cooked!
+
+  return input
+end
+
+def print_page(page)
+  page.each do |e|
+    returns = ''
+    if e['id']
+      returns << "<ID>\n" << e['id']
+    end
+
+    if e['message']
+      returns << "<Informations>\n" << e['message']
+    end
+
+    if e['updated_time']
+      returns << "<Update Time>\n" << e['updated_time']
+    end
+
+    if e['attachments']
+      returns << "\n\n<Attachments>\n"
+      puts e['attachments']
+    end
+
+    puts returns
+    puts "\n\n===================================="
+  end
+end
+
 Commander.configure do
   program :name, 'SecondHandler'
   program :version, '0.0.1'
@@ -17,13 +58,18 @@ Commander.configure do
       if options.token && options.id
         fb = SecondHandler::FbGroupPost.new(options.token, options.id)
         page = fb.first_page
-        page.each do |e|
-          puts "<ID>\n" << e['id']
-          puts "\n\n<Informations>\n" << e['message']
-          puts "\n\n<Update Time>\n" << e['updated_time']
-          puts "\n\n<Attachments>\n"
-          puts e['attachments']
-          puts '============================================================================================================'
+        print_page(page)
+        cmd = read_char
+        while cmd != "\u0003" do
+          case cmd
+          when "\e[A"
+            puts '== Previous Page =='
+            print_page(fb.previous_page)
+          when "\e[B"
+            puts '== Next Page =='
+            print_page(fb.next_page)
+          end
+          cmd = read_char
         end
       end
     end
@@ -34,5 +80,4 @@ Commander.configure do
     c.description = 'Show selling information of twitter'
     # Implementing.
   end
-
 end
