@@ -37,11 +37,12 @@ module SecondHandler
 
     def attachment_helper (attach_hash)
       ok_data = []
+      
       if attach_hash && attach_hash["data"].first["media"]
         ok_data << attach_hash["data"].first["media"]
       end
-      if attach_hash && attach_hash["data"].first["subattachments"]
-        attach_hash["data"].first["subattachments"].each do |item|
+      if attach_hash && attach_hash["data"].first["subattachments"] && attach_hash["data"].first["subattachments"]["data"]
+        attach_hash["data"].first["subattachments"]["data"].each do |item|
           ok_data << item
         end
       end

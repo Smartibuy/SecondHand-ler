@@ -1,7 +1,7 @@
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'second_handler/version'
 Gem::Specification.new do |s|
-  s.name = 'SecondHandler'
+  s.name = 'secondHandler'
   s.version = SecondHandler::VERSION
   s.date = SecondHandler::DATE
   s.executables << 'second_handler'
