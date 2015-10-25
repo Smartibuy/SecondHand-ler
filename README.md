@@ -1,4 +1,4 @@
-SecondHandler
+SecondHandler[![Gem Version](https://badge.fury.io/rb/secondHandler.svg)](https://badge.fury.io/rb/secondHandler)
 ==
 
 ## Description
@@ -14,8 +14,7 @@ gem install secondHandler
 Tips: You can use :arrow_down: & :arrow_up: arrow key to fetch next/previous page.  
 `Ctrl + C` to exit!
 ```shell
-$ second_handler fb --token 'facebook_dev_access_token' --id '817620721658179'
-# 817620721658179 is a Facebook group ID.  
+$ second_handler fb --token 'facebook_dev_access_token' --id 'public_group_id'
 ```
 **Code Snippet**
 ```ruby
@@ -23,7 +22,7 @@ require 'second_handler'
 fb = SecondHandler::FbGroupPost.new('access_token', 'group_id')
 # fetch first page
 page = fb.first_page
-# get content
+# get neat content
 content = page.get_content
 # get next page
 page = page.next_page
