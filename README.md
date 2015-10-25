@@ -1,8 +1,7 @@
-SecondHandler[![Gem Version](https://badge.fury.io/rb/secondHandler.svg)](https://badge.fury.io/rb/secondHandler)
+SecondHandler
 ==
-
-## Description
-SecondHandler is a retriever for second-hand information on Twitter and Facebook.
+SecondHandler is a retriever for second-hand information on Twitter and Facebook.  
+[![Gem Version](https://badge.fury.io/rb/secondHandler.svg)](https://badge.fury.io/rb/secondHandler)
 
 Usage
 ==
