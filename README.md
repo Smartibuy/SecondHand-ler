@@ -20,7 +20,7 @@ $ second_handler fb --token 'facebook_dev_access_token' --id '817620721658179'
 **Code Snippet**
 ```ruby
 require 'second_handler'
-fb = SecondHandler::FbGroupPost.new(access_token, "group_id")
+fb = SecondHandler::FbGroupPost.new('access_token', 'group_id')
 # fetch first page
 page = fb.first_page
 # get content
