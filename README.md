@@ -1,14 +1,21 @@
-SecondHand-ler
+SecondHandler
 ==
 
 ## Description
-SecondHand-ler is a retriever for second-hand groups.
+SecondHandler is a retriever for second-hand information on Twitter and Facebook.
 
 Usage
 ==
 **install**
 ```shell
 gem install secondHandler
+```
+**CLI**  
+Tips: You can use :arrow_down: & :arrow_up: arrow key to fetch next/previous page.  
+`Ctrl + C` to exit!
+```shell
+$ second_handler fb --token 'facebook_dev_access_token' --id '817620721658179'
+# 817620721658179 is a Facebook group ID.  
 ```
 **Code Snippet**
 ```ruby
