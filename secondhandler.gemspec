@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors = ['Sheng Jung Wu', 'Calvin Jeng', 'Henry Chang', 'Yi Wei Huang']
   s.files       =  `git ls-files`.split("\n")
   s.test_files  =  `git ls-files spec/*`.split("\n")
-  s.homepage    =  'https://github.com/Smartibuy/ideate-and-scrape'
+  s.homepage    =  'https://github.com/Smartibuy/SecondHandler'
   s.license     =  'MIT'
 
   # depend gem
