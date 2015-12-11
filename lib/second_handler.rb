@@ -9,7 +9,7 @@ module SecondHandler
     end
 
     def first_page
-      @feed = @graph.get_connections(@group_id, "feed", :fields => ["attachments{media,subattachments{media}}","id","message","updated_time"])
+      @feed = @graph.get_connections(@group_id, "feed", :fields => ["attachments{media,subattachments{media}}","id","message","updated_time","from{id,name,picture}"])
     end
 
     def next_page
@@ -23,12 +23,17 @@ module SecondHandler
     # return feed of current page  infomation , including image
     def get_content
       @feed.map do |item|
-        tmp = Hash.new
-        tmp["id"] = item["id"]
-        tmp["message"] = item["message"]
-        tmp["updated_time"] = item["updated_time"]
-        tmp["attachments"] = attachment_helper(item["attachments"])
-        tmp
+        {
+          "id" => item["id"],
+          "message" => item["message"],
+          "updated_time" => item["updated_time"],
+          "attachments" => attachment_helper(item["attachments"]),
+          "from" => {
+            "id" => item["from"]["id"],
+            "name" => item["from"]["name"],
+            "picture" => item["from"]["picture"]["data"],
+          }
+        }
       end
 
     end
