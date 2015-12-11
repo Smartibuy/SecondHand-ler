@@ -26,7 +26,23 @@ content = page.get_content
 # get next page
 page = page.next_page
 ```
-
+**SecondHandler::FbGroupPost.get_content Hash sample**
+```ruby
+ {
+  "id"=>"0000000_0000000", #feed id
+  "message"=>"OOOO", 
+  "updated_time"=>"2015-11-08T00:00:00+0000", 
+  "attachments"=>[
+    {"media"=>{"image"=>{"height"=>720, "src"=>"http://www.example.com", "width"=>420}}},
+    {"media"=>{"image"=>{"height"=>720, "src"=>"http://www.example.com", "width"=>405}}}
+  ], #post images
+  "from"=>{
+    "id"=>"000000000", #user's fbid
+    "name"=>"My name", #user's fbname
+    "picture"=>{"is_silhouette"=>false, "url"=>"http://www.example.com"} #user's profile picture
+  }
+ }
+ ```
 ## License
 
 ![](https://img.shields.io/packagist/l/doctrine/orm.svg)
