@@ -86,10 +86,10 @@ fbp.previous_page_comment    #fetch previous page comments
 
 CHANGELOG
 ===
-2016-1-5 bump to v1.0.0
+2016-1-5 bump to v1.1.0
 - add single post comment func
 - modify `SecondHandler::FbGroupPost.get_content`  output (no backward support!!!)
-
+- add specified_page function to SecondHandler::FbGroupPost
 
 ## License
 
