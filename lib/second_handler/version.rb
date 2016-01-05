@@ -1,4 +1,4 @@
 module SecondHandler
-  VERSION = '0.0.3'
-  DATE = '2015-10-26'
+  VERSION = '1.0.0'
+  DATE = '2016-1-5'
 end

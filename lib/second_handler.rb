@@ -15,7 +15,6 @@ module SecondHandler
     end
     def get_post_basic
       @basic = @graph.get_object(@post_id, :fields => FB_POSTS_FIELDS)
-      get_basic_content()
       clean_post_content(@basic)
     end
     
