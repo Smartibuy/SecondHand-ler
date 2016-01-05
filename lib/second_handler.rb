@@ -19,7 +19,8 @@ module SecondHandler
     end
     
     def first_comment
-      @comment = @graph.get_connections(@post_id, "comments", :fields => ["from{name,id,picture}","id","message","created_time","like_count", ])
+      @comment = @graph.get_connections(@post_id, "comments", 
+        :fields => ["from{name,id,picture}","id","message","created_time","like_count", ])
     end
     
     def get_comment
@@ -47,14 +48,29 @@ module SecondHandler
       @group_id = group_id
     end
 
-    def first_page
-      @feed = @graph.get_connections(@group_id, "feed", :fields => FB_POSTS_FIELDS)
+    def first_page(page_token=nil,until_stamp=nil)
+      @feed = @graph.get_connections(@group_id, "feed",:fields => FB_POSTS_FIELDS )
     end
-
+    
+    def specified_page (page_token,until_stamp)
+      @feed = @graph.get_connections(@group_id, "feed",
+        :__paging_token => page_token,
+        :until => until_stamp,
+        :fields => FB_POSTS_FIELDS)
+    
+    end
     def next_page
       @feed = @feed.next_page
     end
-
+    
+    def next_page_params
+      @feed.next_page_params
+    end 
+    
+    def previous_page_params
+      @feed.previous_page_params
+    end 
+    
     def previous_page
       @feed = @feed.previous_page
     end
