@@ -28,7 +28,12 @@ module SecondHandler
     def first_comment
       @comment = @graph.get_connections(@post_id, "comments",
         :limit=>1,
-        :fields => ["from{name,id,picture}","id","message","created_time","like_count", ]
+        :fields => ["from{name,id,picture}",
+          "id",
+          "message",
+          "created_time",
+          "like_count", 
+        ]
       )
     end
     
@@ -37,6 +42,17 @@ module SecondHandler
         clean_comment(single_comment)
       end
     end
+    
+    def next_page_comment_params
+      @comment.next_page_params
+    end
+
+    def previous_page_comment_params
+      @comment.previous_page_params
+    end
+    
+    
+    
     def next_page_comment
       @comment = @comment.next_page
     end
