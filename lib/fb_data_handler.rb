@@ -1,5 +1,5 @@
 module FbDataHandler
-    FACEBOOK_URL = "https://www.facebook.com/"
+    FACEBOOK_URL = "https://www.facebook.com"
     private
     def attachment_helper (attach_hash, &func)
       
