@@ -1,4 +1,5 @@
 module FbDataHandler
+    FACEBOOK_URL = "https://www.facebook.com/"
     private
     def attachment_helper (attach_hash, &func)
       
@@ -20,6 +21,7 @@ module FbDataHandler
     def clean_post_content (item)
       {
         "id" => item["id"],
+        "origin_url" => FACEBOOK_URL+"/"+item["id"],
         "message" => item["message"],
         "updated_time" => item["updated_time"],
         "attachments" => attachment_helper(item["attachments"]),
@@ -28,6 +30,8 @@ module FbDataHandler
           "name" => item["from"]["name"],
           "picture" => item["from"]["picture"]["data"],
         },
+        "like_count"=> item["likes"]["summary"]["total_count"],
+        "comment_count"=> item["comments"]["summary"]["total_count"],
     
       }
     end
