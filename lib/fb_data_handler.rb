@@ -36,9 +36,10 @@ module FbDataHandler
     
       }
       if not message_parser.nil?
-          clean = yield item["message"]
-          res = res.merge(clean)
-          
+        clean = yield item["message"]
+        res = res.merge(clean)
+      else
+        res["message"] = item["message"]
       end
       res      
       

@@ -13,15 +13,25 @@ module FBParsers
         end
       end
       if not price.nil?
+        puts lines[2]
         {"price" => price.gsub(",","").to_i , "title" => lines[0] ,"body" => lines[2..-1].join("\n")}
       else
         raise ArgumentError, "message parse fail"
       end
       
     end
-    @@tools = {"1730742887066429" => @@parse_1730742887066429 }
+    @@tools = {
+      "1730742887066429" => @@parse_1730742887066429,
+      "144498012423141" => @@parse_1730742887066429,
+      "107793636088378" => @@parse_1730742887066429,
+      "191505604299442" => @@parse_1730742887066429 
+    }
+    
     def self.message_parser (gid)
       @@tools[gid]
+    end
+    def self.message_parser_all
+      @@tools
     end
   
 end
