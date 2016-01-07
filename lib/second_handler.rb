@@ -36,6 +36,28 @@ module SecondHandler
         ]
       )
     end
+    # 
+    # Get specified page comment
+    # == Parameters:
+    # token::
+    #   paging token
+    # actions::
+    #   canbe :before or :after
+    #
+    def specified_comment(token, action)
+      @comment = @graph.get_connections(@post_id, "comments",
+        :limit=>1,
+        :fields => ["from{name,id,picture}",
+          "id",
+          "message",
+          "created_time",
+          "like_count", 
+        ],
+        action => token,
+      )
+    end
+    
+    
     
     def get_comment
       @comment.map do |single_comment|
