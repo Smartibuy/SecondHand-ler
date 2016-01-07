@@ -14,7 +14,7 @@ module FBParsers
       end
       if not price.nil?
         
-        {"price" => price.gsub(",","").to_i , "title" => lines[0] ,"body" => lines[2..-1].join("\n")}
+        {"price" => price.gsub(",","").to_i , "title" => lines[0] ,"message" => lines[2..-1].join("\n")}
       else
         raise ArgumentError, "message parse fail"
       end
