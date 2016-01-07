@@ -1,7 +1,9 @@
+
+
 module FbDataHandler
     FACEBOOK_URL = "https://www.facebook.com"
     private
-    def attachment_helper (attach_hash, &func)
+    def attachment_helper (attach_hash,&func)
       
       clean_data = []
       
@@ -18,11 +20,10 @@ module FbDataHandler
       clean_data
     end
 
-    def clean_post_content (item)
-      {
+    def clean_post_content (item, &message_parser)
+      res = {
         "id" => item["id"],
         "origin_url" => FACEBOOK_URL+"/"+item["id"],
-        "message" => item["message"],
         "updated_time" => item["updated_time"],
         "attachments" => attachment_helper(item["attachments"]),
         "from" => {
@@ -34,6 +35,13 @@ module FbDataHandler
         "comment_count"=> item["comments"]["summary"]["total_count"],
     
       }
+      if not message_parser.nil?
+          clean = yield item["message"]
+          res = res.merge(clean)
+          
+      end
+      res      
+      
     end
     
     def clean_comment(item)
