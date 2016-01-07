@@ -1,6 +1,7 @@
 require 'koala'
 require 'json'
 require_relative 'fb_data_handler'
+require_relative 'parser_collection'
 
 module SecondHandler
   
@@ -101,6 +102,7 @@ module SecondHandler
     def initialize (access_token, group_id)
       @graph = Koala::Facebook::API.new(access_token)
       @group_id = group_id
+      @message_parser = FBParsers.message_parser @group_id 
     end
 
     def first_page(page_token=nil,until_stamp=nil)
@@ -135,9 +137,14 @@ module SecondHandler
 
     # return feed of current page  infomation , including image
     def get_content (&func)
-      @feed.to_a.map do |single_post|
-        clean_post_content(single_post)
+      data = Array.new
+      @feed.to_a.each do |single_post|
+        begin
+          data << clean_post_content(single_post, &@message_parser)
+        rescue
+        end
       end
+      data
     end
     
     
