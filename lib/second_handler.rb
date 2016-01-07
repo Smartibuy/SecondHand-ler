@@ -4,6 +4,14 @@ require_relative 'fb_data_handler'
 require_relative 'parser_collection'
 
 module SecondHandler
+  def self.read_parsed_info(access_token)
+    graph = Koala::Facebook::API.new(access_token)
+    graph.batch do |batch_api|
+      FBParsers.message_parser_all.each_key do |key|
+        batch_api.get_object(key)
+      end
+    end
+  end
   
   class FbSinglePost
     include FbDataHandler
