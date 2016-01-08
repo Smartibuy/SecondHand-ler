@@ -36,7 +36,6 @@ module SecondHandler
     
     def first_comment
       @comment = @graph.get_connections(@post_id, "comments",
-        :limit=>1,
         :fields => ["from{name,id,picture}",
           "id",
           "message",
@@ -148,7 +147,11 @@ module SecondHandler
       data = Array.new
       @feed.to_a.each do |single_post|
         begin
-          data << clean_post_content(single_post, &@message_parser)
+          if func.nil?
+            data << clean_post_content(single_post, &@message_parser)
+          else
+            data << clean_post_content(single_post, &func)
+          end
         rescue
         end
       end
