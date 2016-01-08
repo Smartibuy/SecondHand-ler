@@ -1,5 +1,3 @@
-
-
 module FbDataHandler
     FACEBOOK_URL = "https://www.facebook.com"
     private
