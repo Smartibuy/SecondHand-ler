@@ -36,7 +36,6 @@ module SecondHandler
     
     def first_comment
       @comment = @graph.get_connections(@post_id, "comments",
-        :limit=>1,
         :fields => ["from{name,id,picture}",
           "id",
           "message",
